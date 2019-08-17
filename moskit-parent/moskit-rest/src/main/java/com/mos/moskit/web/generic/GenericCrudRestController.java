@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import com.mos.moskit.common.jpa.BaseEntity;
 import com.mos.moskit.domain.dao.BaseEntityRepository;
 
-//@RestController()
-//@RequestMapping(value = "/{entity}", produces = MediaType.APPLICATION_JSON_VALUE)
 public abstract class GenericCrudRestController<ENTITY extends BaseEntity> {
 
-	private static final String ACCEPT_APPLICATION_JSON = "Accept=" + MediaType.APPLICATION_JSON_VALUE;
+	private static final String ID = "/{id}";
 	private final BaseEntityRepository<ENTITY> repository;
 
 	public GenericCrudRestController(BaseEntityRepository<ENTITY> repository) {
@@ -30,22 +28,22 @@ public abstract class GenericCrudRestController<ENTITY extends BaseEntity> {
 		return repository.save(entity);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping(ID)
 	public ENTITY save(@PathVariable long id, ENTITY entity) {
 		return repository.save(entity);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping(ID)
 	public ENTITY findOne(@PathVariable long id) {
 		return repository.findById(id).orElse(null);
 	}
 
-	@GetMapping("")
+	@GetMapping
 	public List<ENTITY> findAll() {
 		return StreamSupport.stream(repository.findAll().spliterator(), false).collect(Collectors.toList());
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping(ID)
 	public void delete(@PathVariable long id) {
 		repository.deleteById(id);
 	}
