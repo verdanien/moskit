@@ -1,4 +1,4 @@
-package com.mos.moskitparent;
+package com.mos.moskit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
