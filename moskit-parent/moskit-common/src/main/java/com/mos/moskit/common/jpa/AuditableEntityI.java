@@ -9,15 +9,11 @@ public interface AuditableEntityI<ID extends Serializable> {
 
 	void setEntityStatus(EntityStatus entityStatus);
 
-	LocalDateTime getModifyDate();
+	LocalDateTime getModifiedDate();
 
-	void setModifyDate(LocalDateTime modifyDate);
+	void setModifiedDate(LocalDateTime modifyDate);
 
-	LocalDateTime getCreateDate();
+	LocalDateTime getCreatedDate();
 
-	void setCreateDate(LocalDateTime createDate);
-
-	LocalDateTime getRemoveDate();
-
-	void setRemoveDate(LocalDateTime removeDate);
+	void setCreatedDate(LocalDateTime createDate);
 }

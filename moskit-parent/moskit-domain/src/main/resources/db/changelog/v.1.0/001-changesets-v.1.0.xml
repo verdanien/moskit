@@ -5,18 +5,6 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<changeSet id="2018-09-09_01-24" author="mmosor">
-		<createSequence sequenceName="seq_project" startValue="1" incrementBy="1" ordered="true" />
-		<createTable tableName="project">
-			<column name="id" type="bigint" defaultValueSequenceNext="seq_project"><constraints primaryKey="true" /></column>
-			<column name="entity_status" type="varchar(8)" defaultValue="ACTIVE"><constraints nullable="false" /></column>
-			<column name="created_date" type="timestamp" />
-			<column name="modified_date" type="timestamp" />
-			<column name="name" type="varchar(50)"><constraints unique="true" nullable="false" /></column>
-			<column name="root_dir" type="varchar(255)"><constraints nullable="false" /></column>
-		</createTable>
-	</changeSet>
-	
 	<changeSet id="2019-08-17_19-32" author="mmosor">
 		<createSequence sequenceName="seq_database_connection" startValue="1" incrementBy="1" ordered="true"/>
 		<createTable tableName="database_connection">

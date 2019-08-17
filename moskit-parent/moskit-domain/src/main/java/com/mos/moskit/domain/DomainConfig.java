@@ -9,12 +9,12 @@ import javax.persistence.FlushModeType;
 import javax.sql.DataSource;
 
 import org.hibernate.cfg.AvailableSettings;
-import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mos.moskit.common.jpa.EntityManagerSupplier;
 import com.mos.moskit.common.jpa.EntityManagerSupplier.TransactionalEntityManagerSupplier;
-import com.mos.moskit.common.jpa.EntityManagerUtils;
 
 import liquibase.integration.spring.SpringLiquibase;
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +31,8 @@ import lombok.extern.log4j.Log4j2;
 @Configuration
 @ComponentScan
 @EnableTransactionManagement
+@EnableJpaRepositories
+@EnableJpaAuditing
 public class DomainConfig {
 
 	private static final String LIQUIBASE_PROFILE = "dev";
@@ -77,15 +78,10 @@ public class DomainConfig {
 	private Properties createHibernateProperties() {
 		Properties properties = new Properties();
 		/* standard hbn */
-		properties.setProperty(AvailableSettings.HBM2DDL_AUTO, "validate");
+//		properties.setProperty(AvailableSettings.HBM2DDL_AUTO, "validate");
+		properties.setProperty(AvailableSettings.HBM2DDL_AUTO, "create-drop");
 		properties.setProperty(AvailableSettings.MERGE_ENTITY_COPY_OBSERVER, "allow");
 		properties.setProperty(AvailableSettings.ENABLE_LAZY_LOAD_NO_TRANS, "true");
-		// properties.setProperty(AvailableSettings.DIALECT,
-		// CustomPostgreSQLDialect.class.getName());
-		// properties.setProperty(AvailableSettings.IMPLICIT_NAMING_STRATEGY"hibernate.ejb.naming_strategy",
-		// "org.hibernate.cfg.ImprovedNamingStrategy");
-		// properties.setProperty(AvailableSettings.PHYSICAL_NAMING_STRATEGY"hibernate.ejb.naming_strategy",
-		// "org.hibernate.cfg.ImprovedNamingStrategy");
 		properties.setProperty(AvailableSettings.ORDER_INSERTS, "true");
 		properties.setProperty(AvailableSettings.ORDER_UPDATES, "true");
 		properties.setProperty(AvailableSettings.SHOW_SQL, "true");
