@@ -16,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mos.moskit.common.jpa.BaseAuditableEntity;
 import com.mos.moskit.common.jpa.EntityUtils;
@@ -29,7 +31,7 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @SequenceGenerator(name = EntityUtils.SEQ_GEN, sequenceName = "seq_role", initialValue = 1, allocationSize = 1)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING, length = 20, columnDefinition = "varchar(20)")
-public abstract class AbstractRole extends AbstractPermissible {
+public abstract class AbstractRole extends AbstractPermissible implements GrantedAuthority{
 
 	@Column(nullable = false, insertable = false, updatable = false)
 	@Enumerated(EnumType.STRING)
@@ -39,4 +41,9 @@ public abstract class AbstractRole extends AbstractPermissible {
 	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "user_id")
 	private @Getter @Setter User user;
+	
+	@Override
+	public String getAuthority() {
+		return "ROLE_"+discriminator.name();
+	}
 }

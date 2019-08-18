@@ -58,6 +58,7 @@ public class User extends AbstractPermissible implements UserDetails {
 		Collection<GrantedAuthority> totalPermissions = new HashSet<>();
 		totalPermissions.addAll(getPermissions());
 		for (AbstractRole role : getRoles()) {
+			totalPermissions.add(role);
 			if (role.isActive()) {
 				totalPermissions.addAll(role.getPermissions());
 			}

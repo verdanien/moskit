@@ -8,9 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.mos.moskit.domain.DomainConfig;
+import com.mos.moskit.service.security.CustomGlobalMethodSecurityConfig;
 
 @Configuration
-@ImportAutoConfiguration(classes = { DomainConfig.class })
+@ImportAutoConfiguration(classes = { DomainConfig.class, CustomGlobalMethodSecurityConfig.class })
 @ComponentScan(basePackages = "com.mos.moskit.service")
 public class ServiceConfig {
 

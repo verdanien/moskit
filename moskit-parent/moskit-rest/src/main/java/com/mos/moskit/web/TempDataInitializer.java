@@ -3,6 +3,7 @@ package com.mos.moskit.web;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import com.mos.moskit.domain.dao.UserRepository;
