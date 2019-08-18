@@ -27,4 +27,6 @@ public class PasswordGenerator {
 
 		return messageDigest.digest(plainPassword.getBytes(StandardCharsets.UTF_8));
 	}
+	
+	
 }

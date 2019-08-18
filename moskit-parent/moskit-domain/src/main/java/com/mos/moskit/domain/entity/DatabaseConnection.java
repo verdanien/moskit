@@ -19,7 +19,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "database_connection")
-@SequenceGenerator(name = EntityUtils.SEQ_GEN, sequenceName = "seq_database", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = EntityUtils.SEQ_GEN, sequenceName = "seq_database_connection", initialValue = 1, allocationSize = 1)
 public class DatabaseConnection extends BaseAuditableEntity {
 
 	@Column(length = 100, unique = true)

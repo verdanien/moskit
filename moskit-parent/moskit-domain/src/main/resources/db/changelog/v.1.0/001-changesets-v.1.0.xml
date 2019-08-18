@@ -19,4 +19,58 @@
 			<column name="password" type="varchar(100)"></column>
 		</createTable>
 	</changeSet>
+	
+	<changeSet id="2019-08-18_16-05" author="mmosor">
+		<createSequence sequenceName="seq_user_id" startValue="1" incrementBy="1" ordered="true"/>
+		<createTable tableName="user">
+			<column name="id" type="bigint" defaultValueSequenceNext="seq_user_id"><constraints primaryKey="true"/></column>
+			<column name="entity_status" type="varchar(8)" defaultValue="ACTIVE"><constraints nullable="false" /></column>
+			<column name="created_date" type="timestamp" />
+			<column name="modified_date" type="timestamp" />
+			<column name="login" type="varchar(100)"><constraints unique="true" nullable="false" /></column>
+			<column name="password" type="varchar"><constraints nullable="false"/></column>
+		</createTable>
+		
+		<createSequence sequenceName="seq_role" startValue="1" incrementBy="1" ordered="true"/>
+		<createTable tableName="role">
+			<column name="id" type="bigint" defaultValueSequenceNext="seq_role"><constraints primaryKey="true"/></column>
+			<column name="entity_status" type="varchar(8)" defaultValue="ACTIVE"><constraints nullable="false" /></column>
+			<column name="created_date" type="timestamp" />
+			<column name="modified_date" type="timestamp" />
+			<column name="discriminator" type="varchar(20)"><constraints nullable="false" /></column>
+			<column name="user_id" type="bigint"><constraints foreignKeyName="fk_role_user_id" referencedTableName="user" referencedColumnNames="id" /></column>
+		</createTable>
+		
+		<createSequence sequenceName="seq_user_group" startValue="1" incrementBy="1" ordered="true"/>
+		<createTable tableName="user_group">
+			<column name="id" type="bigint" defaultValueSequenceNext="seq_user_group"><constraints primaryKey="true"/></column>
+			<column name="entity_status" type="varchar(8)" defaultValue="ACTIVE"><constraints nullable="false" /></column>
+			<column name="created_date" type="timestamp" />
+			<column name="modified_date" type="timestamp" />
+			<column name="name" type="varchar(100)"><constraints nullable="false" unique="true"/></column>
+		</createTable>
+		
+		<createSequence sequenceName="seq_user_group_member" startValue="1" incrementBy="1" ordered="true"/>
+		<createTable tableName="user_group_member">
+			<column name="id" type="bigint" defaultValueSequenceNext="seq_user_group_member"><constraints primaryKey="true"/></column>
+			<column name="entity_status" type="varchar(8)" defaultValue="ACTIVE"><constraints nullable="false" /></column>
+			<column name="created_date" type="timestamp" />
+			<column name="modified_date" type="timestamp" />
+			<column name="start_date" type="date" />
+			<column name="end_date" type="date" />
+			<column name="user_id" type="bigint"><constraints foreignKeyName="fk_user_group_member_user_id" referencedTableName="user" referencedColumnNames="id"/></column>
+			<column name="user_group_id" type="bigint"><constraints foreignKeyName="fk_user_group_member_user_group_id" referencedTableName="user_group" referencedColumnNames="id"/></column>
+		</createTable>
+		
+		<createSequence sequenceName="seq_permission" startValue="1" incrementBy="1" ordered="true"/>
+		<createTable tableName="permission">
+			<column name="id" type="bigint" defaultValueSequenceNext="seq_permission"><constraints primaryKey="true"/></column>
+			<column name="entity_status" type="varchar(8)" defaultValue="ACTIVE"><constraints nullable="false" /></column>
+			<column name="created_date" type="timestamp" />
+			<column name="modified_date" type="timestamp" />
+			<column name="name" type="varchar(200)" />
+			<column name="entity_class" type="varchar(200)" />
+			<column name="entity_id" type="bigint"/>
+		</createTable>
+	</changeSet>
 </databaseChangeLog>

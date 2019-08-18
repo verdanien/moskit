@@ -21,6 +21,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<metamodel.output>${project.build.directory}/generated-sources/metamodel</metamodel.output>
 		<skip.tests>false</skip.tests>
+		<apache.commons-collections.version>4.4</apache.commons-collections.version>
+		<apache.commons-lang.version>3.9</apache.commons-lang.version>
+<!-- 		<hibernate.version>4.3.11.Final</hibernate.version> -->
 	</properties>
 
 	<dependencyManagement>
@@ -61,6 +64,19 @@
 				<artifactId>hibernate-validator</artifactId>
 				<version>${hibernate-validator.version}</version>
 			</dependency>
+
+			<!-- apache commons -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${apache.commons-collections.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${apache.commons-lang.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 

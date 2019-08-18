@@ -7,12 +7,12 @@ import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import com.mos.moskit.domain.DomainConfig;
+import com.mos.moskit.service.ServiceConfig;
 import com.mos.moskit.web.handler.ApiVersionRequestMappingHandler;
 
 @SpringBootApplication
 //@PropertySource(value = "classpath:/application.properties", ignoreResourceNotFound = false)
-@ImportAutoConfiguration({ DomainConfig.class, SwaggerConfig.class })
+@ImportAutoConfiguration({ ServiceConfig.class, SwaggerConfig.class })
 public class MoskitRestApp {
 
 	public static void main(String[] args) {

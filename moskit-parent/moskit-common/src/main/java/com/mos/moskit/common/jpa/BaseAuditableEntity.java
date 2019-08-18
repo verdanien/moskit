@@ -9,6 +9,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
+import javax.persistence.Transient;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -47,6 +48,11 @@ public class BaseAuditableEntity extends BaseEntity implements AuditableEntityI<
 	@CreatedDate
 	private @Getter @Setter LocalDateTime createdDate;
 
+	@Transient
+	public boolean isActive() {
+		return EntityStatus.ACTIVE.equals(getEntityStatus());
+	}
+	
 	@PreRemove
 	protected void preRemove() {
 		entityStatus = EntityStatus.DELETED;

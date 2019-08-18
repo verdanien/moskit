@@ -14,5 +14,11 @@
 			<artifactId>moskit-domain</artifactId>
 			<groupId>${project.groupId}</groupId>
 		</dependency>
+
+		<!-- 3rd party -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 	</dependencies>
 </project>
