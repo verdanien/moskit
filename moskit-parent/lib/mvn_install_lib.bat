@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=junit-tools.jar -DgroupId=org.junit.tools -DartifactId=junit-tools -Dversion=1.21 -Dpackaging=jar

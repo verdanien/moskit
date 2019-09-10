@@ -8,12 +8,12 @@ import com.mos.moskit.domain.dao.RoleRepository;
 import com.mos.moskit.domain.entity.account.AbstractRole;
 import com.mos.moskit.web.api.ApiVersions;
 import com.mos.moskit.web.generic.ApiVersion;
-import com.mos.moskit.web.generic.GenericCrudRestController;
+import com.mos.moskit.web.generic.JpaCrudRestController;
 
 @RestController
 @RequestMapping("/roles")
 @ApiVersion({ ApiVersions.API_1 })
-public class RoleRestController extends GenericCrudRestController<AbstractRole> {
+public class RoleRestController extends JpaCrudRestController<AbstractRole> {
 
 	@Autowired
 	public RoleRestController(RoleRepository repository) {

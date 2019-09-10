@@ -34,13 +34,6 @@ public class Permission extends BaseAuditableEntity implements GrantedAuthority 
 	@JsonBackReference
 	@Any(metaDef = META_DEF, metaColumn = @Column(name = META_COL, insertable = false, updatable = false, nullable = false), optional = false)
 	@JoinColumn(name = META_COL_ID)
-//	//@formatter:off
-//	@AnyMetaDef(name=META_DEF, idType = "long", metaType = "string", metaValues = { 
-//			@MetaValue(targetEntity = User.class, value = "com.mos.moskit.domain.entity.account.User"), 
-//			@MetaValue(targetEntity = AbstractRole.class, value = "com.mos.moskit.domain.entity.account.AbstractRole"),
-//			@MetaValue(targetEntity = UserGroup.class, value = "com.mos.moskit.domain.entity.account.UserGroup") 
-//			})
-//	//@formatter:on
 	private @Getter @Setter AbstractPermissible permissible;
 
 	@Convert(converter = ClassConverter.class)

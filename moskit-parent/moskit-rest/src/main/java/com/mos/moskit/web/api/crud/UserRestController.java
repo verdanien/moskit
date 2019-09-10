@@ -6,14 +6,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mos.moskit.domain.dao.UserRepository;
 import com.mos.moskit.domain.entity.account.User;
+import com.mos.moskit.service.security.HasAuthority;
 import com.mos.moskit.web.api.ApiVersions;
 import com.mos.moskit.web.generic.ApiVersion;
-import com.mos.moskit.web.generic.GenericCrudRestController;
+import com.mos.moskit.web.generic.JpaCrudRestController;
 
+@HasAuthority("user")
 @RestController
 @RequestMapping("/users")
 @ApiVersion({ ApiVersions.API_1 })
-public class UserRestController extends GenericCrudRestController<User> {
+public class UserRestController extends JpaCrudRestController<User> {
 
 	@Autowired
 	public UserRestController(UserRepository repository) {

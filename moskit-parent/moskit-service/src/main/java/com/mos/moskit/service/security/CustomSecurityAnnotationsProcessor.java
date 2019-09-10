@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.method.AbstractMethodSecurityMetadataSource;
@@ -26,20 +27,29 @@ public class CustomSecurityAnnotationsProcessor extends AbstractMethodSecurityMe
 	public Collection<ConfigAttribute> getAttributes(Method method, Class<?> targetClass) {
 		if (method.getDeclaringClass() == Object.class) {
 			return Collections.emptyList();
+		}else {
+			//TODO - get annotations from targetClass
 		}
 
 		StringJoiner expression = new StringJoiner(" and ");
 		for (Class<? extends Annotation> annotationType : AnnotationExpressionFactory.annotations()) {
-			Annotation annotation = findAnnotation(method, targetClass, annotationType);
+			Annotation annotation = findAnnotation(method, targetClass, annotationType); //TODO - SHOULD FIND ALL ANNOTATIONS WITH SAME TYPE NOT ONLY FIRST ONE!
 			if (annotation != null) {
 				expression.add(AnnotationExpressionFactory.expression(annotation));
 			}
 		}
 
+		return createConfig(expression);
+	}
+
+	private Collection<ConfigAttribute> createConfig(StringJoiner expression) {
 		List<ConfigAttribute> attrs = new LinkedList<>();
-		PreInvocationAttribute pre = attributeFactory.createPreInvocationAttribute(null, null, expression.toString());
-		if (pre != null) {
-			attrs.add(pre);
+		String finalExpression = expression.toString();
+		if (StringUtils.isNotEmpty(finalExpression)) {
+			PreInvocationAttribute pre = attributeFactory.createPreInvocationAttribute(null, null, expression.toString());
+			if (pre != null) {
+				attrs.add(pre);
+			}
 		}
 		return attrs;
 	}

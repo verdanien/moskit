@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
+import com.mos.moskit.domain.dao.PermissionRepository;
 import com.mos.moskit.domain.dao.UserRepository;
 import com.mos.moskit.domain.entity.account.Role;
 import com.mos.moskit.domain.entity.account.User;
+import com.mos.moskit.domain.entity.permission.Permission;
 import com.mos.moskit.service.UserService;
 
 @Component
@@ -19,6 +21,8 @@ public class TempDataInitializer {
 
 	@Autowired
 	private UserService userService;
+	
+	private PermissionRepository permissionRepo;
 
 	@PostConstruct
 	public void initialize() {
@@ -34,6 +38,9 @@ public class TempDataInitializer {
 			user.setPassword("dev");
 			user = userService.createNewUser(user);
 			userService.assignRoleToUser(user, Role.DEVELOPER);
+//			Permission p = new Permission();
+//			p.setPermissible(user);
+//			permissionRepo.save(entity)
 		}
 
 	}

@@ -8,12 +8,12 @@ import com.mos.moskit.domain.dao.PermissionRepository;
 import com.mos.moskit.domain.entity.permission.Permission;
 import com.mos.moskit.web.api.ApiVersions;
 import com.mos.moskit.web.generic.ApiVersion;
-import com.mos.moskit.web.generic.GenericCrudRestController;
+import com.mos.moskit.web.generic.JpaCrudRestController;
 
 @RestController
 @RequestMapping("/permissions")
 @ApiVersion({ ApiVersions.API_1 })
-public class PermissionRestController extends GenericCrudRestController<Permission> {
+public class PermissionRestController extends JpaCrudRestController<Permission> {
 
 	@Autowired
 	public PermissionRestController(PermissionRepository repository) {
